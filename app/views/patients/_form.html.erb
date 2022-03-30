@@ -1,0 +1,24 @@
+<%= simple_form_for patient do |f| %>
+  <% current_year = Date.today.year %>
+  <%= f.input :name %>
+  <%= f.input :image %>
+  <%= f.input :cid, collection: [[0, 'No Criminal Recoed'], [1, 'Criminal Record']], label_method: :second, value_method: :first %>
+  <%= f.input :phone_number %>
+  <%= f.input :joining_date,
+              as: :date,
+              html5: true,
+              start_year: current_year, 
+              end_year: current_year + 1 %>
+  <%= f.input :release_date,
+              as: :date, 
+              html5: true,
+              start_year: current_year, 
+              end_year: current_year + 1 %>
+  <%= f.input :diseases %>
+  <%= f.input :active, collection: [[1, 'Sick'], [0, 'Recovered']],
+              label_method: :second, value_method: :first %>
+  <%= f.input :facility_id, as: :select, 
+              collection: Facility.where(user_id: current_user.id).pluck(:id, :name),
+              label_method: :second, value_method: :first %>
+  <%= f.button :submit, class: 'btn-success mt-3' %>
+<% end %>

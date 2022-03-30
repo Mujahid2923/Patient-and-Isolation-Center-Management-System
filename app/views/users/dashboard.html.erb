@@ -1,0 +1,89 @@
+<% if current_user.admin? %>
+  <div class="container my-5">
+    <div class="card">
+      <div class="card-header">Patient Informations</div>
+        <div class="card-body">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Total Patients</th>
+                <th scope="col">Acive Patients</th>
+                <th scope="col">Recovered Patients</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= Patient.count %></td>
+                <td><%= Patient.where(active: 1).count %></td>
+                <td><%= Patient.where(active: 0).count %></td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+    <br>
+    <div class="card">
+      <div class="card-header">Facility List</div>
+      <div class="card-body">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Number of Patients</th>
+              <th scope="col">Active Patient</th>
+              <th scope="col">Recovered Patient</th>
+              <th scope="col">Transfered Patient</th>
+              <th scope="col">Patients List</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @user_info.facilities.each do |facility| %>
+            <tr>
+              <td><%= facility.id %></td>
+              <td><%= link_to(facility.name, facility_path(facility.id)) %></td>
+              <td><%= facility.patients.count %></td>
+              <td><%= facility.patients.where(active: 1).count %></td>
+              <td><%= facility.patients.where(active: 0).count %></td>
+              <td><%= Transfer.where(transfered_facility: facility.name).count %></td>
+              <td> <%= link_to('Patients list', facility_patients_list_path(facility.id)) %> </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div class="container my-5">
+    <div class="card">
+      <div class="card-header">Facility List</div>
+      <div class="card-body">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Number of Patients</th>
+              <th scope="col">Active Patient</th>
+              <th scope="col">Recovered Patient</th>
+              <th scope="col">Transfered Patient</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @user_info.facilities.each do |facility| %>
+            <tr>
+              <td><%= facility.id %></td>
+              <td><%= facility.name %></td>
+              <td><%= link_to(facility.patients.count, facility_path(facility.id)) %></td>
+              <td><%= link_to(facility.patients.where(active: 1).count, facility_patients_active_path(facility.id)) %></td>
+              <td><%= link_to(facility.patients.where(active: 0).count, facility_patients_recovered_path(facility.id)) %></td>
+              <td><%= link_to(Transfer.where(transfered_facility: facility.name).count, facility_patients_transfered_path(facility.id)) %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+<% end %>

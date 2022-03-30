@@ -1,0 +1,8 @@
+<div class="container my-5">
+  <div class="card">
+    <div class="card-header">Update Announcement<%= link_to('Back', announcements_path, class: "btn btn-primary float-right btn-sm") %></div>
+    <div class="card-body">
+      <%= render('form', announcement: @announcement) %>
+    </div>
+  </div>
+</div>

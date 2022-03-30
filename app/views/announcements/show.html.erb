@@ -1,0 +1,30 @@
+<div class="container my-5">
+  <div class="card">
+    <div class="card-header">Announcement Info<%= link_to('Back', announcements_path, class: "btn btn-primary float-right btn-sm") %></div>
+    <br>
+    <center>
+      <%= @announcement.image.valid? == true ? 
+          image_tag(@announcement.image, width: '150px') : image_tag("/images/announce.png", width: '150px') %>
+    </center>
+    <div class="card-body">
+      <table class="table table-striped table-bordelred mt-1">
+        <tr>
+          <th scope="row">ID</th>
+          <td><%= @announcement.id %></td>
+        </tr>
+        <tr>
+          <th scope="row">Title</th>
+          <td><%= @announcement.title %></td>
+        </tr>
+        <tr>
+          <th scope="row">Description</th>
+          <td><%= @announcement.description %></td>
+        </tr>
+        <tr>
+          <th scope="row">Account Created</th>
+          <td><%= time_ago_in_words @announcement.created_at %> ago </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

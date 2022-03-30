@@ -1,0 +1,33 @@
+---
+en:
+  activerecord:
+    errors:
+      models:
+        category:
+          attributes:
+            name:
+              blank: can not be empty
+              taken: already exist
+  app_name: PIMS
+  models:
+    announcement:
+      one: Announcement
+      other: Announcements
+    facility:
+      one: Facility
+      other: Facilities
+    patient:
+      one: Patient
+      other: Parients
+    user:
+      one: User
+      other: Users
+  notice:
+    create:
+      failed: Failed to Create %{resource}
+      success: "%{resource} Successfully Created"
+    delete:
+      success: "%{resource} %{name} Successfully Deleted"
+    update:
+      failed: Failed to Update %{resource}
+      success: "%{resource} Successfully Updated"

@@ -1,0 +1,84 @@
+<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <%= t('app_name') %>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto">
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to 'Add Patient',
+              new_patient_path,
+              class: "nav-link" %>
+          </li>
+          <% if current_user.admin? %>
+            <li class="nav-item">
+              <%= link_to 'Announce',
+                new_announcement_path,
+                class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Invite',
+                new_invitation_path,
+                class: "nav-link" %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to 'Add Facility',
+                new_facility_path,
+                class: "nav-link" %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= link_to 'Dashboard',
+            user_dashboard_path(current_user.id),
+            class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Edit Profile',
+            edit_user_registration_path(current_user),
+            class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Log Out', 
+            destroy_user_session_path, 
+            method: :delete, 
+            class: "nav-link" %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to 'Sign Up', 
+            new_user_registration_path, 
+            class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Log In', 
+            user_session_path, 
+            class: "nav-link" %>
+        </li>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+<% unless flash[:notice].blank? %>
+  <div class="container mt-5">
+    <div class="alert alert-primary" role="alert">
+      <%= flash[:notice] %>
+    </div>
+  </div>
+<% end %>
+<% unless flash[:danger].blank? %>
+  <div class="container mt-5">
+    <div class="alert alert-danger" role="alert">
+      <%= flash[:danger] %>
+    </div>
+  </div>
+<% end %>
