@@ -4,4 +4,5 @@ class User < ApplicationRecord
 
   has_many :facilities
   has_many :announcements
+  has_many :transfers
 end

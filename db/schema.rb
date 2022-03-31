@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2022_03_28_033130) do
   end
 
   create_table "transfers", force: :cascade do |t|
-    t.string "transfered_facility", null: false
+    t.integer "to_facility", null: false
     t.date "date", null: false
     t.bigint "patient_id", null: false
     t.datetime "created_at", precision: 6, null: false

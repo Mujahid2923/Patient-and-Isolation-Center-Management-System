@@ -45,7 +45,7 @@
               <td><%= facility.patients.count %></td>
               <td><%= facility.patients.where(active: 1).count %></td>
               <td><%= facility.patients.where(active: 0).count %></td>
-              <td><%= Transfer.where(transfered_facility: facility.name).count %></td>
+              <td><%= Transfer.where(to_facility: facility.id).count %></td>
               <td> <%= link_to('Patients list', facility_patients_list_path(facility.id)) %> </td>
             </tr>
           <% end %>
@@ -78,7 +78,7 @@
               <td><%= link_to(facility.patients.count, facility_path(facility.id)) %></td>
               <td><%= link_to(facility.patients.where(active: 1).count, facility_patients_active_path(facility.id)) %></td>
               <td><%= link_to(facility.patients.where(active: 0).count, facility_patients_recovered_path(facility.id)) %></td>
-              <td><%= link_to(Transfer.where(transfered_facility: facility.name).count, facility_patients_transfered_path(facility.id)) %></td>
+              <td><%= link_to(Transfer.where(to_facility: facility.id).count, facility_patients_transfered_path(facility.id)) %></td>
             </tr>
           <% end %>
           </tbody>

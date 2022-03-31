@@ -14,6 +14,11 @@
       <%= link_to 'Show Announcements',
           announcements_path,
           class: "nav-link" %>
+      <% if user_signed_in? && !current_user.admin? %>
+        <%= link_to 'Transfer Request',
+            user_transfers_approve_path(current_user.id),
+            class: "nav-link" %>
+      <% end %>
     </center>
   </div>
 </div>

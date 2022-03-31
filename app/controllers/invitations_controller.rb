@@ -9,10 +9,10 @@ class InvitationsController < ApplicationController
     if @invitation.save
       UserMailer.invite_email(current_user, @invitation).deliver
 
-      flash[:notice] = 'Invitations Send Successfully'
+      flash[:notice] = I18n.t('notice.create.success', resource: Invitation.model_name.human)
       redirect_to root_path
     else
-      flash[:danger] = 'Failed to send Invitations'
+      flash[:danger] = I18n.t('notice.create.failed', resource: Invitation.model_name.human)
       render('new')
     end
   end

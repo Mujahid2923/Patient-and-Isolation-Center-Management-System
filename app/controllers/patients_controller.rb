@@ -22,16 +22,8 @@ class PatientsController < ApplicationController
   def edit; end
 
   def update
-    pre_facility_id = @patient.facility_id
-    curr_facility_id = patient_params['facility_id'].to_i
-
     if @patient.update(patient_params)
       flash[:notice] = I18n.t('notice.update.success', resource: Patient.model_name.human)
-
-      if curr_facility_id > 0 && pre_facility_id != curr_facility_id
-        Transfer.create(transfered_facility: Facility.find(curr_facility_id).name, date: Date.today,
-                        patient_id: @patient.id)
-      end
 
       redirect_to patient_path(@patient.id)
     else
@@ -60,7 +52,7 @@ class PatientsController < ApplicationController
   end
 
   def transfered
-    @transfered_list = Transfer.where(transfered_facility: Facility.find(params[:facility_id]).name)
+    @transfered_list = Transfer.where(to_facility: Facility.find(params[:facility_id]).name)
   end
 
   private

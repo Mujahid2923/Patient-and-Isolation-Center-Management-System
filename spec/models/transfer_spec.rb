@@ -1,12 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Transfer do
-  describe 'validations' do
-    it { is_expected.to validate_presence_of(:transfered_facility) }
-    it { is_expected.to validate_presence_of(:date) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:facility) { FactoryBot.create(:facility, user_id: user.id) }
+  let(:patient) { FactoryBot.create(:patient, facility_id: facility.id) }
+  let(:transfer) { FactoryBot.create(:transfer, to_facility: facility.id, patient_id: patient.id) }
+
+  it 'has a valid patient' do
+    expect(transfer).to be_valid
   end
 
-  describe 'associations' do
-    it { is_expected.to belong_to :patient }
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:to_facility) }
+    it { is_expected.to validate_presence_of(:date) }
   end
 end

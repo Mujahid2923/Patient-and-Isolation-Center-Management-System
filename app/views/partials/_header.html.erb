@@ -10,11 +10,16 @@
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item">
-            <%= link_to 'Add Patient',
+            <%= link_to 'Patient',
               new_patient_path,
               class: "nav-link" %>
           </li>
           <% if current_user.admin? %>
+            <li class="nav-item">
+              <%= link_to 'Facility',
+                new_facility_path,
+                class: "nav-link" %>
+            </li>
             <li class="nav-item">
               <%= link_to 'Announce',
                 new_announcement_path,
@@ -23,12 +28,6 @@
             <li class="nav-item">
               <%= link_to 'Invite',
                 new_invitation_path,
-                class: "nav-link" %>
-            </li>
-          <% else %>
-            <li class="nav-item">
-              <%= link_to 'Add Facility',
-                new_facility_path,
                 class: "nav-link" %>
             </li>
           <% end %>

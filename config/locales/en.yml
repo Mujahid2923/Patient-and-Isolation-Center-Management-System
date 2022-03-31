@@ -16,9 +16,15 @@ en:
     facility:
       one: Facility
       other: Facilities
+    invitation:
+      one: Invitation
+      other: Invitations
     patient:
       one: Patient
       other: Parients
+    transfer:
+      one: Transfer
+      other: Transfers
     user:
       one: User
       other: Users

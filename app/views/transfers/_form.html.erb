@@ -1,0 +1,8 @@
+<%= simple_form_for transfer do |f| %>
+  <%= f.input :to_facility, 
+              collection: Facility.where.not(id: Patient.find(params['patient_id']).facility_id).pluck(:id, :name),
+              label_method: :second, value_method: :first %>
+  <%= f.input :patient_id, input_html: { value: params['patient_id'] }, readonly: true %>
+
+  <%= f.button :submit, class: 'btn-success mt-3' %>
+<% end %>

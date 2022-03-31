@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
   root 'pages#home'
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
   resources :announcements
   resources :users do
     get 'dashboard'
+    get 'transfers/approve'
   end
-  resources :patients
+  resources :patients do
+    get 'transfers/new'
+  end
   resources :facilities do
     get 'patients/list'
     get 'patients/active'
@@ -14,4 +17,5 @@ Rails.application.routes.draw do
   end
   resources :invitations
   get 'pages/empty'
+  resources :transfers
 end

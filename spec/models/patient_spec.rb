@@ -5,7 +5,7 @@ RSpec.describe Patient do
   let(:facility) { FactoryBot.create(:facility, user_id: user.id) }
   let(:patient) { FactoryBot.create(:patient, facility_id: facility.id) }
 
-  it 'has a valid patient factory' do
+  it 'has a valid patient' do
     expect(patient).to be_valid
   end
 

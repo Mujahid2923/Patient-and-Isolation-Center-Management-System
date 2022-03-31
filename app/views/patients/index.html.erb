@@ -9,11 +9,12 @@
             <th scope="col">Name</th>
             <th scope="col">Image</th>
             <th scope="col">Facility</th>
-            <th scope="col">Criminal Record</th>
+            <th scope="col">CID</th>
             <th scope="col">Phone</th>
             <th scope="col">Join</th>
             <th scope="col">Release</th>
             <th scope="col">Diseases</th>
+            <th scope="col">Transfer</th>
             <th scope="col-3">Action</th>
           </tr>
         </thead>
@@ -25,11 +26,12 @@
             <td><%= patient.image.valid? == true ? 
                     image_tag(patient.image, width: '50px') : image_tag("/images/person.jpg", width: '50px')  %></td>
             <td><%= patient.facility.name %></td>
-            <td><%= patient.cid == 0 ? 'No Criminal Recoed' : 'Criminal Record' %></td>
+            <td><%= patient.cid == 0 ? 'Pos' : 'Neg' %></td>
             <td><%= patient.phone_number %></td>
             <td><%= patient.joining_date %></td>
             <td><%= patient.release_date %></td>
             <td><%= patient.diseases %></td>
+            <td><%= link_to('Transfer', patient_transfers_new_path(patient.id), class: "btn btn-secondary btn-sm") %></td>
             <td>
               <%= link_to('Show', patient_path(patient), class: "btn btn-success btn-sm") %>
               <% if can? :update, patient %>
