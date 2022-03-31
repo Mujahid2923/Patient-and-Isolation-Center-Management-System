@@ -17,8 +17,14 @@
   <%= f.input :diseases %>
   <%= f.input :active, collection: [[1, 'Sick'], [0, 'Recovered']],
               label_method: :second, value_method: :first %>
-  <%= f.input :facility_id, as: :select, 
-              collection: Facility.where(user_id: current_user.id).pluck(:id, :name),
-              label_method: :second, value_method: :first %>
+  <% if current_user.admin? %>
+    <%= f.input :facility_id, as: :select, 
+                collection: Facility.pluck(:id, :name),
+                label_method: :second, value_method: :first %>
+  <% else %>
+    <%= f.input :facility_id, as: :select, 
+                collection: Facility.where(user_id: current_user.id).pluck(:id, :name),
+                label_method: :second, value_method: :first %>
+  <% end %>
   <%= f.button :submit, class: 'btn-success mt-3' %>
 <% end %>
