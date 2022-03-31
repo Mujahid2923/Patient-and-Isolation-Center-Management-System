@@ -1,4 +1,7 @@
 <%= simple_form_for facility do |f| %>
   <%= f.input :name %>
+  <%= f.input :user_id, as: :select, 
+              collection: User.pluck(:id, :name),
+              label_method: :second, value_method: :first %>
   <%= f.button :submit, class: 'btn-success mt-3' %>
 <% end %>
